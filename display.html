@@ -1,22 +1,40 @@
 <script src = "http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
 
+<div class="welcome">WELCOME!</div>
+
 <h1>Add filters to your pictures for fun!</h1>
+
 <div>
   <h3>This page allows you to edit your pictures by adding interesting filters.
   </h3>
 </div>
+
 <p>
 <canvas id= "c1"></canvas>
-<p>
-<p>  
-Upload Image
 </p>
+
+ <p id = "labels"> 
+Upload your images here!
+</p>
+
 <p>
 <input type="file" multiple = "false" accept = "image/*" id="img" onchange = "loadImage()">
 </p>
-<p>Add filters</p>
-<input type="button" value = "Sunlight" id = "f1" onclick = "sunlight()">
-<input type="button" value="Crimson" id="f2" onclick = "doCrimson()">
-<input type="button" value="Colorful" id="f3" onclick = "doColorful()">
-<input type="button" value="Grayscale" id="f4" onclick = "grayScale()">
-<input type="button" value="Reset Picture" id="reset" onclick = "resetImg()">
+
+<p id ="labels">Add filters below!</p>
+
+<input type="button" value = "Sunshine" class= "f" onclick = "sunlight()">
+
+<input type="button" value = "Rainbow" class= "f" onclick = "doRainbow()">
+
+<input type="button" value="Crimson" class="f" onclick = "doCrimson()">
+
+<input type="button" value="Colorful" class="f" onclick = "doColorful()">
+
+<input type="button" value="Grayscale" class="f" onclick = "grayScale()">
+
+<input type="button" value="SplitFilter" class="f" onclick = "doSplit()">
+
+<input type="button" value="Add Black Frame" class="f" onclick = "addFrame()">
+<p>
+<input type="button" value="Reset Picture" class="f" id="reset" onclick = "resetImg()"></p>
