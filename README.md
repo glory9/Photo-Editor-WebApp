@@ -1,3 +1,2 @@
 # Photo-Editor-WebApp
-This is photo editing application is built using JavaScript, HTML and the dukelearntoprogram functions library. It allows a user to add filters and frames to photos of their choice.
-Note: I'm still building some aspects of the program.
+This is photo editing application is built using JavaScript, HTML and the dukelearntoprogram functions library. It allows a user to add amazing filters and frames to photos of their choice.
