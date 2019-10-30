@@ -1,9 +1,25 @@
+// webpage styling code
+let welcome = document.querySelector(".welcome");
+let letters = welcome.textContent.split("");
+welcome.textContent = "";
+letters.forEach((letter, i) => {
+  let span = document.createElement("span");
+  span.textContent = letter;
+  span.style.animationDelay = `${i / 5}s`;
+  welcome.append(span);
+});
+
+
+// filter coding starts from here
 var canvas = document.getElementById("c1");
 var image = null;
 var filtered;
 var grayImage;
 var crimson;
 var colorful;
+var framed;
+var split;
+var rainbow;
 
 
 function loadImage(){
@@ -14,6 +30,9 @@ function loadImage(){
   crimson = new SimpleImage(fileinput);
   filtered = new SimpleImage(fileinput);
   grayImage = new SimpleImage(fileinput);
+  framed = new SimpleImage(fileinput);
+  split = new SimpleImage(fileinput);
+  rainbow = new SimpleImage(fileinput);
   image.drawTo(canvas);
   if (image != null){
     alert("Image loaded successfully");
@@ -114,16 +133,16 @@ function doColorful(){
     }
     }
     else {
-      var gr =((pix.getRed()+pix.getBlue()+pix.getGreen())/3);
-      if (gr < 128){
-        pix.setGreen(gr * 1.56);
+      var zz =((pix.getRed()+pix.getBlue()+pix.getGreen())/3);
+      if (zz < 128){
+        pix.setGreen(zz * 1.56);
         pix.setBlue(0);
         pix.setRed(0);
     }
       else{
         pix.setGreen(200);
-        pix.setBlue((gr * 1.56) - 200);
-        pix.setRed((gr * 1.56) - 200);
+        pix.setBlue((zz * 1.56) - 200);
+        pix.setRed((zz * 1.56) - 200);
     }
     }
   }
@@ -133,7 +152,150 @@ function doColorful(){
 
 
 function addFrame(){
-  //still in process
+  clearScreen();
+  
+  var width = framed.getWidth();
+  var height = framed.getHeight();
+  for (var dot of framed.values()){
+    if ((dot.getX() <= (0.02 * width)) || (dot.getX() >= (0.98 * width))){
+      dot.setRed(0);
+      dot.setBlue(0);
+      dot.setGreen(0);
+    }
+    else if ((dot.getY() <= (0.02 * height)) || (dot.getY() >= (0.98 * height))){
+      dot.setRed(0);
+      dot.setBlue(0);
+      dot.setGreen(0);
+    }
+}
+  framed.drawTo(canvas);
+}
+
+
+function doSplit(){
+  clearScreen();
+  
+  var k = split.getWidth()/split.getHeight();
+  for (var p of split.values()){
+    var x = p.getX();
+    var y = p.getY();
+    var g = p.getGreen();
+    var b = p.getBlue();
+    var mean =((p.getRed()+p.getBlue()+p.getGreen())/3);
+    if (x <= ((k * y) - (0.2 * split.getHeight()))){
+      p.setBlue(0.7 * b);
+      p.setGreen(0.9 * g);      
+    }
+    if (x > ((1.2 * split.getHeight()) - (y/k))){
+      if (mean < 128){
+        p.setRed(mean * 2);
+        p.setGreen(mean * 0.8);
+        p.setBlue(0);
+    }
+      else{
+        p.setRed(255);
+        p.setGreen((1.2 * mean) - 51);
+        p.setBlue((2 * mean) - 255);
+    }    
+    }
+  }
+  split.drawTo(canvas);  
+}
+
+
+function doRainbow(){
+  clearScreen();
+  var w = rainbow.getWidth();
+  var ref = w/7
+  for (var pix of rainbow.values()){
+    var mean =((pix.getRed()+pix.getBlue()+pix.getGreen())/3);
+    if (pix.getX() <= ref){
+      if (mean < 128){
+        pix.setRed(mean * 2);
+        pix.setGreen(0);
+        pix.setBlue(0);
+    }
+      else{
+        pix.setRed(255);
+        pix.setGreen((mean * 2) - 255);
+        pix.setBlue((mean * 2) - 255);
+    }
+  }
+    else if (pix.getX() <= (2 * ref)){
+      if (mean < 128){
+        pix.setRed(mean * 2);
+        pix.setGreen(mean * 0.8);
+        pix.setBlue(0);
+    }
+      else{
+        pix.setRed(255);
+        pix.setGreen((1.2 * mean) - 51);
+        pix.setBlue((2 * mean) - 255);
+    }
+    }
+    else if (pix.getX() <= (ref * 3)){
+      if (mean < 128){
+        pix.setRed(mean * 2);
+        pix.setGreen(mean * 2);
+        pix.setBlue(0);
+    }
+      else{
+        pix.setRed(255);
+        pix.setGreen(255);
+        pix.setBlue((2 * mean) - 255);
+    }
+    }
+    else if (pix.getX() <= (ref * 4)){
+      if (mean < 128){
+        pix.setRed(0);
+        pix.setGreen(mean * 2);
+        pix.setBlue(0);
+    }
+      else{
+        pix.setRed((2 * mean) - 255);
+        pix.setGreen(255);
+        pix.setBlue((2 * mean) - 255);
+    }
+    }
+    else if (pix.getX() <= (ref * 5)){
+      if (mean < 128){
+        pix.setRed(0);
+        pix.setGreen(0);
+        pix.setBlue(2 * mean);
+    }
+      else{
+        pix.setRed((2 * mean) - 255);
+        pix.setGreen((2 * mean) - 255);
+        pix.setBlue(255);
+    }
+    }
+    else if (pix.getX() <= (ref * 6)){
+      if (mean < 128){
+        pix.setRed(mean * 0.8);
+        pix.setGreen(0);
+        pix.setBlue(mean * 2);
+    }
+      else{
+        pix.setRed((1.2 * mean) - 51);
+        pix.setGreen((2 * mean) - 255);
+        pix.setBlue(255);
+    }
+    }
+    else {
+      if (mean < 128){
+        pix.setRed(mean * 1.6);
+        pix.setGreen(0);
+        pix.setBlue(mean * 1.6);
+    }
+      else{
+        pix.setRed((mean * 0.4) + 153);
+        pix.setGreen((mean * 2) - 255);
+        pix.setBlue((mean * 0.4) + 153);
+    }
+    }
+  }
+
+  rainbow.drawTo(canvas);
 }
 
 
