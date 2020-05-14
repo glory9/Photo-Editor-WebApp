@@ -6,7 +6,7 @@ letters.forEach((letter, i) => {
   span.textContent = letter;
   span.style.animationDelay = `${i / 5}s`;
   welcome.append(span);
-}
+});
 
 var canvas = document.getElementById("c1");
 var image = null;
